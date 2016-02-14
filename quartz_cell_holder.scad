@@ -1,25 +1,36 @@
-// PARAMETERS
+/* [HOUSING_PARAMETERS] */
 
 //windows
+
 window_height = 200;
 window_width = 130;
 window_width_repaired = window_width - 0.001;
     
 //frames
+
 frame_thickness = 50;
 frame_height = window_height + 2 * frame_thickness;
 frame_width = window_width + 2 * frame_thickness;
 frame_width_repaired = frame_width + 0.001;
 
+// [0:frame_thickness]
 chamfer = 5;
 bevel_width = frame_thickness - chamfer;
+// [0:frame_thickness]
 bevel_height = 25;
 
 //screws
+
+// [basement_height = screwhead_height + screwstem_height]
 screwhead_height = 45;
-screwhead_radius = 40;
+// [basement_height = screwhead_height + screwstem_height]
 screwstem_height = 25;
+screwhead_radius = 40;
 screwstem_radius = 20;
+
+make = "INEXTREMIS";
+
+/* [Hidden] */
 
 //basement
 basement_height = screwhead_height + screwstem_height;
@@ -39,7 +50,6 @@ block_center = [ox, oy, oz + block_height/2];
 frame_center = [ox, oy, oz + basement_height + frame_height/2];
 window_center = frame_center;
 basement_center = [ox, oy, oz + basement_height/2];
-make = "INEXTREMIS";
 
 
 // Main geometry
@@ -140,7 +150,7 @@ module hFrames(){
     color("green") translate([0, frame_width_repaired/2, window_height/2]) rotate (a = [90, 0, -90])
     prism_z(bevel_width, bevel_height, window_width_repaired);
     
-    //LOWEST FRAMES
+    //BOTTOM FRAMES
     color("red") translate([-frame_width_repaired/2, 0, -window_height/2]) rotate (a = [90, 180, 180])
     prism_z(bevel_width, bevel_height, window_width_repaired);
     color("yellow") translate([frame_width_repaired/2, 0, -window_height/2]) rotate (a = [90, 180, 0])
@@ -195,7 +205,7 @@ module cones() {
     color("green") translate ([window_width/2, window_width/2 + chamfer, window_height/2]) rotate ([-90, 0, 0])
     cone();
         
-    //LOWEST cones
+    //bottom cones
     color("yellow") translate ([window_width/2 + chamfer, -window_width/2, -window_height/2]) rotate ([0, 90, 0])
     cone();
     color("yellow") translate ([window_width/2 + chamfer, window_width/2, -window_height/2]) rotate ([0, 90, 0])
